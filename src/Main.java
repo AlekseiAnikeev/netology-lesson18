@@ -13,19 +13,23 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             int value = 0;
-            System.out.println("Выберите операцию: \n1. Добавить\n2. Показать\n3. Удалить");
+            System.out.println("Выберите операцию: \n1. Добавить\n2. Показать\n3. Удалить\n4. Поиск\n5. Выход");
             try {
                 value = Integer.parseInt(scanner.nextLine());
-                if (value > 3 || value < 1) {
+                if (value > 5 || value < 1) {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Не корректный ввод операции. Попробуйте еще раз.");
             }
+            if (value == 5) {
+                return;
+            }
             switch (value) {
                 case 1 -> add();
                 case 2 -> preview();
                 case 3 -> remove();
+                case 4 -> search();
             }
         }
     }
@@ -69,6 +73,16 @@ public class Main {
         for (String line : shoppingList) {
             System.out.println(count + ". " + line);
             count++;
+        }
+    }
+    public static void search() {
+        System.out.println("Введите текст для поиска:");
+        String line = scanner.nextLine();
+        System.out.println("Поиск:");
+        for (int i = 0; i < shoppingList.size(); i++) {
+            if(shoppingList.get(i).toLowerCase().contains(line.toLowerCase())) {
+                System.out.println((i +1) + ". " + shoppingList.get(i));
+            }
         }
     }
 }
